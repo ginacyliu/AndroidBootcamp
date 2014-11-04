@@ -1,7 +1,7 @@
 Todo App
 ===============
 
-This is an Android demo application for displaying the latest box office movies using the [RottenTomatoes API](http://www.rottentomatoes.com/). See the [RottenTomatoes Networking Tutorial](http://guides.thecodepath.com/android/RottenTomatoes-Networking-Tutorial) on our cliffnotes for a step-by-step tutorial.
+This is a pre-work app for Android Bootcamp preparation.
 
 Time spent: 2 hours spent in coding
 
