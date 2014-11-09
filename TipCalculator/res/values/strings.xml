@@ -5,6 +5,8 @@
     <string name="rate_btn_1">10%</string>
     <string name="rate_btn_2">15%</string>
     <string name="rate_btn_3">20%</string>
-    <string name="tip">Tip is: %1$s</string>
+    <string name="rate">%d%%</string>
+    <string name="person">%d P</string>
+    <string name="tip">$ %,.2f /P</string>
 
 </resources>

@@ -12,50 +12,116 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="60dp"
         android:ems="10" >
+
         <requestFocus />
     </EditText>
-    
+
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:orientation="horizontal" >
-        
-        <Button
-            android:id="@+id/btnRate1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical" >
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:tag="0.1"
-            android:onClick="calculateTip"
-            android:text="@string/rate_btn_1" />
-        
-        <Button
-            android:id="@+id/btnRate2"
-            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:paddingBottom="20dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/btnRate1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="changeTip"
+                android:tag="0.1"
+                android:text="@string/rate_btn_1" />
+
+            <Button
+                android:id="@+id/btnRate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="changeTip"
+                android:tag="0.15"
+                android:text="@string/rate_btn_2" />
+
+            <Button
+                android:id="@+id/btnRate3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="changeTip"
+                android:tag="0.2"
+                android:text="@string/rate_btn_3" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tag="0.15"
-            android:onClick="calculateTip"
-            android:text="@string/rate_btn_2" />
-        
-        <Button
-            android:id="@+id/btnRate3"
-            android:layout_width="wrap_content"
+            android:orientation="horizontal" >
+
+            <SeekBar
+                android:id="@+id/sbRate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:progress="1"
+                android:max="5" />
+
+            <TextView
+                android:id="@+id/tvRate"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:text="@string/rate"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tag="0.2"
-            android:onClick="calculateTip"
-            android:text="@string/rate_btn_3" />
-        
+            android:orientation="horizontal" >
+
+            <SeekBar
+                android:id="@+id/sbPerson"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:max="19" />
+
+            <TextView
+                android:id="@+id/tvPerson"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:text="@string/person"
+                android:textSize="16sp" />
+        </LinearLayout>
     </LinearLayout>
-    
+
+    <TextView
+        android:id="@+id/tvTipLabel"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/ic_tip" />
+
     <TextView
         android:id="@+id/tvTip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-		android:layout_marginBottom="60dp"
+        android:layout_marginBottom="75dp"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/tvTipLabel"
         android:text="@string/tip"
-        android:textSize="18sp" />
+        android:textSize="20sp" />
 
 </RelativeLayout>
