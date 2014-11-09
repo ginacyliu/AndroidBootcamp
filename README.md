@@ -20,7 +20,7 @@ Tip Calculator App
 
 This is Week-1 homework app for Android Bootcamp.
 
-Time spent: 2 hours spent in total
+Time spent: 5 hours spent in total (2 hours for required; 3 hours for optional stories)
 
 Completed user stories:
 
