@@ -39,6 +39,29 @@ Walkthrough of all user stories:
 
 <img src="TipCalculator.gif" height="350" /> <img src="TipCalculator2.gif" height="350" />
 
+Instagram Client App
+===============
+
+This is Week-2 homework app for Android Bootcamp.
+
+Time spent: 5 hours spent in total
+
+Completed user stories:
+
+ * [x] User can scroll through current popular photos from Instagram
+ * [x] For each photo displayed, user can see the following details:
+  * Graphic, Caption, Username
+  * (Optional) relative timestamp, like count, user profile image
+ * [ ] Advanced: Add pull-to-refresh for popular stream with SwipeRefreshLayout
+ * [ ] Advanced: Show latest comment for each photo (bonus: show last 2 comments)
+ * [ ] Advanced: Display each photo with the same style and proportions as the real Instagram
+ * [ ] Advanced: Display each user profile image using a CircularImageView
+ * [ ] Advanced: Display a nice default placeholder graphic for each image during loading (read more about Picasso)
+ * [ ] Advanced: Improve the user interface through styling and coloring
+ * [ ] Bonus: Allow user to view all comments for an image within a separate screen or a dialog fragment
+
+Walkthrough of all user stories:
+
+<img src="InstagramClient.gif" height="350" />
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
-
-
