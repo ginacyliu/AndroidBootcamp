@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_image"
+        android:contentDescription="@string/image_label"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true" />
+    
+    <RelativeLayout
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_user"
+        android:padding="@dimen/view_horizontal_margin" >
+        
+        <ImageView
+            android:id="@+id/ivUserPic"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/bg_user_pic"
+            android:contentDescription="@string/user_pic_label"
+            android:scaleType="centerCrop" />
+        
+        <TextView
+            android:id="@+id/tvUserName"
+            android:layout_toRightOf="@id/ivUserPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/view_horizontal_margin"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end" />
+        
+        <TextView
+            android:id="@+id/tvLikes"
+            android:layout_below="@id/tvUserName"
+            android:layout_toRightOf="@id/ivUserPic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/view_horizontal_margin"
+            android:drawableLeft="@drawable/ic_like"
+            android:drawablePadding="3dp" />
+        
+        <TextView
+            android:id="@+id/tvTimestamp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/view_horizontal_margin"
+            android:textColor="@color/text_time"
+            android:drawableLeft="@drawable/ic_time"
+            android:drawablePadding="5dp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+        
+    </RelativeLayout>
+    
+    <TextView
+        android:id="@+id/tvCaption"
+        android:layout_below="@id/ivImage"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:padding="@dimen/view_horizontal_margin"
+        android:maxLines="3"
+        android:ellipsize="end" />
+
+</RelativeLayout>
