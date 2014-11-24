@@ -15,6 +15,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
+import android.widget.AbsListView.OnScrollListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.GridView;
@@ -46,6 +50,21 @@ public class SearchActivity extends Activity {
         
         imageAdapter = new ImageResultAdapter(this, imageResults);
         gvImages.setAdapter(imageAdapter);
+        gvImages.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View parent, int position, long arg3) {
+                Intent i = new Intent(getApplicationContext(), ImageDisplayActivity.class);
+                ImageResult image = imageResults.get(position);
+                i.putExtra("url", image.getUrl());
+                startActivity(i);
+            }
+        });
+        gvImages.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                customLoadMoreDataFromApi(page);
+            }
+        });
     }
     
     @Override
@@ -92,18 +111,23 @@ public class SearchActivity extends Activity {
     }
     
     public void onImageSearch(View v) {
+        customLoadMoreDataFromApi(0);
+    }
+    
+    public void customLoadMoreDataFromApi(int offset) {
         String query = etSearch.getText().toString();
+        final int page = offset;
         
-        Log.d("DEBUG", String.format(API_URL, Uri.encode(query), 6, 0, optionImageSize, optionImageColor, optionImageType, optionSiteFilter));
+        Log.d("DEBUG", String.format(API_URL, Uri.encode(query), 6, page*6, optionImageSize, optionImageColor, optionImageType, optionSiteFilter));
         
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(String.format(API_URL, Uri.encode(query), 6, 0, optionImageSize, optionImageColor, optionImageType, optionSiteFilter), new JsonHttpResponseHandler() {
+        client.get(String.format(API_URL, Uri.encode(query), 6, page*6, optionImageSize, optionImageColor, optionImageType, optionSiteFilter), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 JSONArray items = null;
                 try {
                     items = response.getJSONObject("responseData").getJSONArray("results");
-                    imageResults.clear();
+                    if (page == 0) imageAdapter.clear();
                     imageAdapter.addAll(ImageResult.fromJSONArray(items));
                 } catch (JSONException e) {
                     e.printStackTrace();
