@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Twitter Client</string>
+    <string name="action_compose">Compose</string>
+    <string name="login_label">Log in</string>
+    
+    <string name="title_activity_timeline">Home</string>
+    <string name="tweet_user_name_label">Foo</string>
+    <string name="tweet_body_label">This is the tweet body</string>
+    <string name="tweet_profile_image_label">This is the profile image</string>
+    <string name="tweet_time_label">1 min</string>
+    <string name="tweet_user_screen_name_label">\@foo</string>
+    <string name="compose_back_button">❮</string>
+    <string name="compose_tweet_button">Tweet</string>
+    <string name="tweet_body">What\'s happening?</string>
+
+</resources>

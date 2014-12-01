@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp" >
+
+    <ImageView
+        android:id="@+id/ivProfileImage"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/image_tweet_profile"
+        android:contentDescription="@string/tweet_profile_image_label"
+        android:src="@drawable/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@id/ivProfileImage"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textStyle="bold"
+        android:textColor="@color/twitter_black"
+        android:text="@string/tweet_user_name_label" />
+
+    <TextView
+        android:id="@+id/tvScreenName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/tvUserName"
+        android:layout_toLeftOf="@+id/tvTime"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/twitter_darkgray"
+        android:text="@string/tweet_user_screen_name_label" />
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textColor="@color/twitter_lightblack"
+        android:text="@string/tweet_time_label" />
+
+    <TextView
+        android:id="@+id/tvBody"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvUserName"
+        android:layout_below="@+id/tvUserName"
+        android:textColor="@color/twitter_black"
+        android:text="@string/tweet_body_label" />
+
+    <ImageView
+        android:id="@+id/ivMedia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvBody"
+        android:layout_below="@+id/tvBody"
+        android:layout_marginTop="5dp"
+        android:src="@drawable/ic_launcher" />
+
+</RelativeLayout>
