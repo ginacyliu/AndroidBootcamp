@@ -64,7 +64,11 @@ public class Tweet {
             tweet.created_at = jsonObject.getString("created_at");
             tweet.body = jsonObject.getString("text");
             tweet.user = User.fromJSON(jsonObject.getJSONObject("user"));
-            tweet.medias = Media.fromJSONArray(jsonObject.getJSONObject("extended_entities").getJSONArray("media"));
+            if (jsonObject.has("extended_entities") && jsonObject.getJSONObject("extended_entities").has("media")) {
+                tweet.medias = Media.fromJSONArray(jsonObject.getJSONObject("extended_entities").getJSONArray("media"));
+            } else {
+                tweet.medias = null;
+            }
         } catch (JSONException e) {
             e.printStackTrace();
             return null;

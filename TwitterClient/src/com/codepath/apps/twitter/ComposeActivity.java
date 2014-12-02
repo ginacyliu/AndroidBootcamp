@@ -20,8 +20,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 
 public class ComposeActivity extends Activity {
 
-    public static final int RESULT_COMPOSE_OK = 200;
-    public static final int RESULT_COMPOSE_CANCEL = 205;
+    public static final int RESULT_COMPOSE_OK = 100;
+    public static final int RESULT_COMPOSE_CANCEL = 105;
     public static final String ACTION_COMPOSE = "com.codepath.apps.gridimagesearch.SettingsActivity.ACTION_COMPOSE";
     
     private static final int LEN_TWEET_MAX = 140;

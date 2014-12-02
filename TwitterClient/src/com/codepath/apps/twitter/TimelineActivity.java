@@ -53,6 +53,7 @@ public class TimelineActivity extends Activity {
         lvTweets.setOnScrollListener(new EndlessScrollListener() {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {
+                Log.d("DEBUG", "onLoadMore: " + page + " | " + totalItemsCount);
                 populateTimeline(page);
             }
         });
@@ -77,11 +78,11 @@ public class TimelineActivity extends Activity {
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("DEBUG", String.format("onActivityResult %d", requestCode));
-        switch (requestCode) {
+        Log.d("DEBUG", String.format("onActivityResult %d", resultCode));
+        switch (resultCode) {
             case ComposeActivity.RESULT_COMPOSE_OK:
                 // Fetch new post into stream
-                populateTimeline(-1);
+                populateTimeline(0);
                 break;
             case ComposeActivity.RESULT_COMPOSE_CANCEL:
                 // Do nothing

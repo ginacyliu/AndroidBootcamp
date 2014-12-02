@@ -64,10 +64,11 @@
     <ImageView
         android:id="@+id/ivMedia"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="140dp"
         android:layout_alignLeft="@+id/tvBody"
         android:layout_below="@+id/tvBody"
         android:layout_marginTop="5dp"
-        android:src="@drawable/ic_launcher" />
+        android:scaleType="centerCrop"
+        android:background="@color/twitter_lightgray" />
 
 </RelativeLayout>

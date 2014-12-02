@@ -4,6 +4,7 @@ import org.scribe.builder.api.Api;
 import org.scribe.builder.api.TwitterApi;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.codepath.oauth.OAuthBaseClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -24,8 +25,8 @@ import com.loopj.android.http.RequestParams;
 public class TwitterClient extends OAuthBaseClient {
     public static final Class<? extends Api> REST_API_CLASS = TwitterApi.class;
     public static final String REST_URL = "https://api.twitter.com/1.1";
-    public static final String REST_CONSUMER_KEY = "HYi8bAZF06ZlfF8WZ5ndaP9uP";
-    public static final String REST_CONSUMER_SECRET = "Tumvdiv0ejZDP5aYCAAN7UflzwgI3ehmdUHBd4iN86BIhK4cfR";
+    public static final String REST_CONSUMER_KEY = "k6tcS3P52bH0yb9AYcZyNc2T1";
+    public static final String REST_CONSUMER_SECRET = "h4kXEwyIbfZzkviRgWv05Ws4Rtwq6UAqCgIAZeVjQbiCfIH0E2";
     public static final String REST_CALLBACK_URL = "oauth://cptwitterclient";
 
     public TwitterClient(Context context) {
@@ -35,14 +36,16 @@ public class TwitterClient extends OAuthBaseClient {
     public void getHomeTimeline(AsyncHttpResponseHandler handler, String max_id, String since_id) {
         String apiUrl = getApiUrl("statuses/home_timeline.json");
         RequestParams params = new RequestParams();
-        params.put("count", "25");
+        params.put("count", "20");
         if (max_id != null) params.put("max_id", max_id);
         if (since_id != null) params.put("since_id", since_id);
+        Log.d("DEBUG", apiUrl + " | " + params.toString());
         client.get(apiUrl, params, handler);
     }
     
     public void getAccountInfo(AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("account/verify_credentials.json");
+        Log.d("DEBUG", apiUrl);
         client.get(apiUrl, null, handler);
     }
     
@@ -50,6 +53,7 @@ public class TwitterClient extends OAuthBaseClient {
         String apiUrl = getApiUrl("statuses/update.json");
         RequestParams params = new RequestParams();
         params.put("status", status);
+        Log.d("DEBUG", apiUrl + " | " + params.toString());
         client.post(apiUrl, params, handler);
     }
     

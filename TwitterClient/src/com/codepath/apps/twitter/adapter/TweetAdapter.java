@@ -49,7 +49,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
         ivProfileImage.setImageResource(0);
         imageLoader.displayImage(tweet.getUser().getProfile_image_url(), ivProfileImage);
         
-        if (tweet.getMedias().size() > 0 && tweet.getMedias().get(0).getType().toString() == "photo") {
+        if (tweet.getMedias() != null && tweet.getMedias().size() > 0) {
             ivMedia.setVisibility(View.VISIBLE);
             ivMedia.setImageResource(0);
             imageLoader.displayImage(tweet.getMedias().get(0).getMedia_url(), ivMedia);
