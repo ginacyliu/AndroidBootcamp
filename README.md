@@ -123,6 +123,6 @@ Completed user stories:
 
 Walkthrough of all user stories:
 
-<img src="TwitterClient.gif" height="350" />
+<img src="TwitterClient/TwitterClient.gif" height="350" />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
