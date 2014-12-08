@@ -122,6 +122,7 @@ Completed user stories:
 * [ ] Stretch: Compose View activity is replaced with a modal overlay
 
 Walkthrough of all user stories:
+
 <img src="TwitterClient/TwitterClient.gif" height="350" />
 
 ===============
@@ -148,6 +149,8 @@ User Stories:
 * [ ] Optional: Improve the user interface and theme the app to feel twitter branded
 * [ ] Optional: User can search for tweets matching a particular query and see results
 * [ ] Stretch: User can view their direct messages (or send new ones)
+
+Walkthrough of all user stories:
 
 <img src="TwitterClient/TwitterClient2.gif" height="350" />
 
