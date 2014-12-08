@@ -39,21 +39,44 @@ public class TwitterClient extends OAuthBaseClient {
         params.put("count", "20");
         if (max_id != null) params.put("max_id", max_id);
         if (since_id != null) params.put("since_id", since_id);
-        Log.d("DEBUG", apiUrl + " | " + params.toString());
+        client.get(apiUrl, params, handler);
+    }
+    
+    public void getMentionsTimeline(AsyncHttpResponseHandler handler, String max_id, String since_id) {
+        String apiUrl = getApiUrl("statuses/mentions_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", "20");
+        if (max_id != null) params.put("max_id", max_id);
+        if (since_id != null) params.put("since_id", since_id);
+        client.get(apiUrl, params, handler);
+    }
+    
+    public void getUserTimeline(AsyncHttpResponseHandler handler, String user_id, String max_id, String since_id) {
+        String apiUrl = getApiUrl("statuses/user_timeline.json");
+        RequestParams params = new RequestParams();
+        params.put("count", "20");
+        if (user_id != null) params.put("user_id", user_id);
+        if (max_id != null) params.put("max_id", max_id);
+        if (since_id != null) params.put("since_id", since_id);
         client.get(apiUrl, params, handler);
     }
     
     public void getAccountInfo(AsyncHttpResponseHandler handler) {
         String apiUrl = getApiUrl("account/verify_credentials.json");
-        Log.d("DEBUG", apiUrl);
         client.get(apiUrl, null, handler);
+    }
+    
+    public void getUserLookup(AsyncHttpResponseHandler handler, String user_id) {
+        String apiUrl = getApiUrl("users/lookup.json");
+        RequestParams params = new RequestParams();
+        params.put("user_id", user_id);
+        client.get(apiUrl, params, handler);
     }
     
     public void postStatusUpdate(AsyncHttpResponseHandler handler, String status) {
         String apiUrl = getApiUrl("statuses/update.json");
         RequestParams params = new RequestParams();
         params.put("status", status);
-        Log.d("DEBUG", apiUrl + " | " + params.toString());
         client.post(apiUrl, params, handler);
     }
     

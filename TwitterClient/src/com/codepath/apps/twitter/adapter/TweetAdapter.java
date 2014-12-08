@@ -6,7 +6,6 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.format.DateUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +47,7 @@ public class TweetAdapter extends ArrayAdapter<Tweet> {
         ImageLoader imageLoader = ImageLoader.getInstance();
         ivProfileImage.setImageResource(0);
         imageLoader.displayImage(tweet.getUser().getProfile_image_url(), ivProfileImage);
+        ivProfileImage.setTag(tweet.getUser().getUid());
         
         if (tweet.getMedias() != null && tweet.getMedias().size() > 0) {
             ivMedia.setVisibility(View.VISIBLE);

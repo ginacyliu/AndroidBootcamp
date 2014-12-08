@@ -1,62 +1,31 @@
 package com.codepath.apps.twitter;
 
-import java.util.ArrayList;
-
-import org.json.JSONArray;
-
-import android.app.Activity;
+import android.app.ActionBar;
+import android.app.ActionBar.Tab;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v4.widget.SwipeRefreshLayout.OnRefreshListener;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
 
-import com.codepath.apps.twitter.adapter.TweetAdapter;
-import com.codepath.apps.twitter.models.Tweet;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.codepath.apps.twitter.fragments.HomeTimelineFragment;
+import com.codepath.apps.twitter.fragments.MentionsTimelineFragment;
+import com.codepath.apps.twitter.fragments.TimelineFragment;
+import com.codepath.apps.twitter.listeners.FragmentTabListener;
 
-public class TimelineActivity extends Activity {
+public class TimelineActivity extends FragmentActivity {
 
-    private TwitterClient client;
-    private ArrayList<Tweet> tweets;
-    private TweetAdapter adapter;
-    private ListView lvTweets;
-    private SwipeRefreshLayout swipeContainer;
+    private ActionBar actionBar;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_timeline);
         
-        client = TwitterClientApp.getRestClient();
-        populateTimeline(0);
-        
-        lvTweets = (ListView) findViewById(R.id.lvTweets);
-        tweets = new ArrayList<Tweet>();
-        adapter = new TweetAdapter(this, tweets);
-        lvTweets.setAdapter(adapter);
-        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright, 
-                android.R.color.holo_blue_dark, 
-                android.R.color.holo_blue_light, 
-                android.R.color.white);
-        
-        swipeContainer.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                populateTimeline(0);
-            } 
-        });
-        lvTweets.setOnScrollListener(new EndlessScrollListener() {
-            @Override
-            public void onLoadMore(int page, int totalItemsCount) {
-                Log.d("DEBUG", "onLoadMore: " + page + " | " + totalItemsCount);
-                populateTimeline(page);
-            }
-        });
+        setupTabs();
     }
     
     @Override
@@ -72,6 +41,10 @@ public class TimelineActivity extends Activity {
             Intent i = new Intent(this, ComposeActivity.class);
             startActivityForResult(i, ComposeActivity.RESULT_COMPOSE_OK);
             return true;
+        } else if (menuId == R.id.action_profile)  {
+            Intent i = new Intent(this, ProfileActivity.class);
+            startActivity(i);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -82,7 +55,7 @@ public class TimelineActivity extends Activity {
         switch (resultCode) {
             case ComposeActivity.RESULT_COMPOSE_OK:
                 // Fetch new post into stream
-                populateTimeline(0);
+                getCurrentFragment().populateTimeline(-1);
                 break;
             case ComposeActivity.RESULT_COMPOSE_CANCEL:
                 // Do nothing
@@ -92,28 +65,39 @@ public class TimelineActivity extends Activity {
         }
     }
     
-    public void populateTimeline(final int offset) {
-        String max_id = (offset>0 && tweets.size()>0) ? String.valueOf(tweets.get(tweets.size()-1).getUid()-1) : null;
-        String since_id = (offset<0) ? String.valueOf(tweets.get(0).getUid()+1) : null;
-        client.getHomeTimeline(new JsonHttpResponseHandler(){
-            @Override
-            public void onFailure(Throwable e, String s) {
-                Log.d("DEBUG", e.toString() + s.toString());
-                swipeContainer.setRefreshing(false);
-            }
-            @Override
-            public void onSuccess(JSONArray json) {
-                if (offset == 0) adapter.clear();
-                if (offset < 0) {
-                    ArrayList<Tweet> newTweets = Tweet.fromJSONArray(json);
-                    for (int i=newTweets.size(); i>0; i--) {
-                        adapter.insert(newTweets.get(i-1), 0);
-                    }
-                } else {
-                    adapter.addAll(Tweet.fromJSONArray(json));
-                }
-                swipeContainer.setRefreshing(false);
-            }
-        }, max_id, since_id);
+    private void setupTabs() {
+        actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+        actionBar.setDisplayShowTitleEnabled(true);
+        
+        Tab tab1 = actionBar
+            .newTab()
+            .setText(R.string.title_fragment_home)
+            .setIcon(R.drawable.ic_action_home)
+            .setTag("HomeTimelineFragment")
+            .setTabListener(
+                new FragmentTabListener<HomeTimelineFragment>(R.id.flTimeline, this, "HomeTimelineFragment", HomeTimelineFragment.class));
+        actionBar.addTab(tab1);
+        actionBar.selectTab(tab1);
+        Tab tab2 = actionBar
+            .newTab()
+            .setText(R.string.title_fragment_mentions)
+            .setIcon(R.drawable.ic_action_mention)
+            .setTag("MentionTimelineFragment")
+            .setTabListener(
+                new FragmentTabListener<MentionsTimelineFragment>(R.id.flTimeline, this, "MentionTimelineFragment", MentionsTimelineFragment.class));
+        actionBar.addTab(tab2);
+    }
+    
+    private TimelineFragment getCurrentFragment() {
+        FragmentManager fm = getSupportFragmentManager();
+        TimelineFragment fragment = (TimelineFragment) fm.findFragmentByTag(actionBar.getSelectedTab().getTag().toString());
+        return fragment;
+    }
+    
+    public void onClickProfileImage(View v) {
+        Intent i = new Intent(this, ProfileActivity.class);
+        i.putExtra(ProfileActivity.KEY_USER_ID, v.getTag().toString());
+        startActivity(i);
     }
 }
